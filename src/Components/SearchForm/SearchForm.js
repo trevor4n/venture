@@ -1,11 +1,21 @@
 import React from 'react'
 
-const SearchForm = () => {
+const SearchForm = ({handleChange, handleSubmit, searchParams}) => {
     return (
         <div>
-            <form className='App-search_form'>
-                <input placeholder='Where would you like to venture?' type='text' name='searchString' required />
-                <button type='submit'>Venture!</button>
+            <form onSubmit={handleSubmit} className="App-SearchForm">
+                <input
+                    placeholder="Where would you like to venture?"
+                    type="text"
+                    name="searchParams"
+                    required
+                    onChange={handleChange}
+                    value={searchParams[1].location}
+                />
+                <button type="submit">
+                    {/* <SearchIcon height="2rem" width="2rem" /> */}
+                    Venture!
+                </button>
             </form>
         </div>
     )
