@@ -4,6 +4,7 @@ const TripIndex = ({trips, getTrips, setTrip}) => {
 
     useEffect(() => {
         getTrips()
+        console.log(`TripIndex trips::`,trips)
     }, [])
 
     return (

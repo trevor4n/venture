@@ -105,11 +105,11 @@ function App() {
   }
 
   function getTrips(){
-    axios.get('http:localhost:8000/trips')
-    // .then(res => res.data)
-    .then(res => res.json())
+    axios.get('http://localhost:8000/trips')
+    .then(res => res.data)
+    // .then(res => res.json())
     .then(res => {
-      setTrips(res.data)
+      setTrips(res)
       console.log(`getTrips:: `, trips)
     })
   }
