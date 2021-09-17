@@ -121,9 +121,6 @@ function App() {
       />
       <SearchResults results={results}/> */}
       <main>
-        {/* proxy sandbox */}
-        <TravelSafe />
-
         {/* Trip Index */}
         <Route
           exact

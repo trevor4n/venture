@@ -30,22 +30,25 @@ const TravelSafe = () => {
       },
     })
       .then(checkStatus)
-      // .then(res => res.json())
-      // .then(res => console.log(res))
-      .then((res) => res.data)
-      .then((res) => {
-        // console.log(res.json())
+      .then(res => res.json())
+      .then(res => {
         setGuideline(res)
+      })
+      .then(res => {
+        console.log('TravelSafe component guideline', guideline)
       })
   }
 
   useEffect(() => {
     fetchGuideline()
+    // console.log(guideline)
   }, [])
 
   return (
     <div>
-      <div>Summary: {guideline ? guideline.summary : null}</div>
+      <h3>{guideline.details}</h3>
+      <div>{guideline ? guideline.summary : null}</div>
+      <h4>{}</h4>
     </div>
   )
 }
