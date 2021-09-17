@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Route } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { Route } from 'react-router-dom'
 import SearchForm from './Components/SearchForm/SearchForm'
 import SearchResults from './Components/SearchResults/SearchResults'
 import SearchHeader from './Components/SearchHeader/SearchHeader'
-import Guideline from './Components/Guideline/Guideline';
+import Guideline from './Components/Guideline/Guideline'
 import TripIndex from './Components/TripIndex/TripIndex'
-import TravelSafe from './Components/TravelSafe';
+import TravelSafe from './Components/TravelSafe'
 import axios from 'axios'
 // import fetch from 'node-fetch'
-import './App.css';
+import './App.css'
 
 function App() {
   const searchOptions = {
@@ -21,13 +21,13 @@ function App() {
     // icebox - https://developers.travelperk.com/docs/rest-api
     // endpoint: '/restrictions',
     // endpoint: '/airline_safety_measures',
-    endpoint: '/guidelines'
+    endpoint: '/guidelines',
   }
 
   const requestOptions = {
     method: 'GET', // default
     // mode: 'no-cors', // todo - uncomment?
-    redirect: 'follow' // default
+    redirect: 'follow', // default
   }
 
   // NODE FETCH
@@ -44,15 +44,15 @@ function App() {
   // }
 
   const [searchParams, setSearchParams] = useState([
-    { locationType: "country_code" },
-    { location: "" }
+    { locationType: 'country_code' },
+    { location: '' },
   ])
   const [lastSearch, setLastSearch] = useState([])
   const [results, setResults] = useState([])
   const [trips, setTrips] = useState([])
   const [trip, setTrip] = useState([])
 
-  function getResults(searchParams){
+  function getResults(searchParams) {
     // stretch - Travel Restrictions parametric url
     // ref - https://developers.travelperk.com/docs/travel-restrictions
     // stretch - Airline Safety Measurres parametric url
@@ -65,44 +65,45 @@ function App() {
     // fetch(url, requestOptions)
     fetch(url, requestOptions, {
       headers: {
-        'Authorization': 'ApiKey ' + searchOptions.key,
-        'Accept': 'application/json',
+        Authorization: 'ApiKey ' + searchOptions.key,
+        Accept: 'application/json',
         'Api-Version': '1',
-        'Accept-Language': 'en'
-      }
+        'Accept-Language': 'en',
+      },
     })
-    .then(response => response.json()) 
-    .then(response => {
-      console.log(`TravelSafe response::`, response)
-      setResults(response.data)
-      setLastSearch(searchParams)
-      setSearchParams({})
-    })
-    .catch(console.error)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(`TravelSafe response::`, response)
+        setResults(response.data)
+        setLastSearch(searchParams)
+        setSearchParams({})
+      })
+      .catch(console.error)
   }
 
   function handleChange(event) {
     let tmpSearchParams = [
-      { locationType: "country_code" },
-      { location: "" + event.target.value }
+      { locationType: 'country_code' },
+      { location: '' + event.target.value },
     ]
     // let tmpSearchParams = searchParams
     // tmpSearchParams[1].location = '' + event.target.value
     setSearchParams(tmpSearchParams)
   }
-  
+
   function handleSubmit(event) {
     event.preventDefault()
     getResults(searchParams)
   }
 
-  function getTrips(){
-    axios.get('http://localhost:8000/trips')
-    .then(res => res.data)
-    .then(res => {
-      setTrips(res)
-      // console.log(`getTrips:: `, trips)
-    })
+  function getTrips() {
+    axios
+      .get('http://localhost:8000/trips')
+      .then((res) => res.data)
+      .then((res) => {
+        setTrips(res)
+        // console.log(`getTrips:: `, trips)
+      })
   }
 
   useEffect(() => {
@@ -124,16 +125,25 @@ function App() {
         <TravelSafe />
 
         {/* Trip Index */}
-        <Route exact path='/' 
-          render={() => 
+        <Route
+          exact
+          path="/"
+          render={() => (
             <TripIndex trips={trips} getTrips={getTrips} setTrip={setTrip} />
-          }
+          )}
         />
 
         {/* Guideline Show */}
-        <Route exact path='/guidelines/:id' 
-          render={routerProps => (
-            <Guideline match={routerProps.match} trip={trip} getResults={getResults} results={results} />
+        <Route
+          exact
+          path="/guidelines/:id"
+          render={(routerProps) => (
+            <Guideline
+              match={routerProps.match}
+              trip={trip}
+              getResults={getResults}
+              results={results}
+            />
           )}
         />
         {/* stretch - perhaps use /trips as the exact trip index and use the '/' path as a non-exact catch all that redirects to '/trips' */}
