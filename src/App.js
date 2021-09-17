@@ -5,10 +5,10 @@ import SearchResults from './Components/SearchResults/SearchResults'
 import SearchHeader from './Components/SearchHeader/SearchHeader'
 import Guideline from './Components/Guideline/Guideline';
 import TripIndex from './Components/TripIndex/TripIndex'
+import TravelSafe from './Components/TravelSafe';
 import axios from 'axios'
+// import fetch from 'node-fetch'
 import './App.css';
-
-// import nodeFetch from 'node-fetch'
 
 function App() {
   const searchOptions = {
@@ -24,6 +24,14 @@ function App() {
     endpoint: '/guidelines'
   }
 
+  const requestOptions = {
+    method: 'GET', // default
+    // mode: 'no-cors', // todo - uncomment?
+    redirect: 'follow' // default
+  }
+
+  // NODE FETCH
+  // ref - https://github.com/node-fetch/node-fetch#api
   // const requestOptions = {
   //   method: 'GET', // default
   //   headers: {
@@ -35,59 +43,42 @@ function App() {
   //   redirect: 'follow' // default
   // }
 
-  const requestOptions = {
-    method: 'GET', // default
-    // mode: 'no-cors', // todo - uncomment??
-    redirect: 'follow' // default
-  }
-
-  const [results, setResults] = useState([])
-  // todo - initialState should corelate to endpoint used
-  // current array breakdown
-  // const [searchParams, setSearchParams] = useState({
-  //   locationType: "country_code",
-  //   location: "CZ"
-  // })
   const [searchParams, setSearchParams] = useState([
     { locationType: "country_code" },
     { location: "" }
   ])
   const [lastSearch, setLastSearch] = useState([])
+  const [results, setResults] = useState([])
   const [trips, setTrips] = useState([])
   const [trip, setTrip] = useState([])
 
-  useEffect(() => {
-    // getResults(searchParams)
-    getTrips()
-  }, [])
-
   function getResults(searchParams){
-    // todo - Travel Restrictions parametric url
+    // stretch - Travel Restrictions parametric url
     // ref - https://developers.travelperk.com/docs/travel-restrictions
-    // todo - Airline Safety Measurres parametric url
+    // stretch - Airline Safety Measurres parametric url
     // ref - https://developers.travelperk.com/docs/airline-safety-measures
     // wip - Travel Guidelines parametric url
     // ref - https://developers.travelperk.com/reference#retrieve-a-local-guideline
     const url = `${searchOptions.baseUrl}${searchOptions.api}${searchOptions.endpoint}?location_type=${searchParams[0].locationType}&location=${searchParams[1].location}`
 
-    // todo - NODE FETCH
-    // ref - https://github.com/node-fetch/node-fetch#api
-    // nodeFetch(url, requestOptions)
+    // NODE FETCH
+    // fetch(url, requestOptions)
     fetch(url, requestOptions, {
       headers: {
         'Authorization': 'ApiKey ' + searchOptions.key,
-        // 'Accept': 'application/json',
+        'Accept': 'application/json',
         'Api-Version': '1',
         'Accept-Language': 'en'
       }
     })
-    .then(response => response.json()) //API call successful
+    .then(response => response.json()) 
     .then(response => {
-      setResults(response.data);
-      setLastSearch(searchParams);
-      setSearchParams({}); //reset params after searching
+      console.log(`TravelSafe response::`, response)
+      setResults(response.data)
+      setLastSearch(searchParams)
+      setSearchParams({})
     })
-    .catch(console.error);
+    .catch(console.error)
   }
 
   function handleChange(event) {
@@ -108,12 +99,16 @@ function App() {
   function getTrips(){
     axios.get('http://localhost:8000/trips')
     .then(res => res.data)
-    // .then(res => res.json())
     .then(res => {
       setTrips(res)
       // console.log(`getTrips:: `, trips)
     })
   }
+
+  useEffect(() => {
+    // getResults(searchParams)
+    getTrips()
+  }, [])
 
   return (
     <div className="App">
@@ -125,6 +120,9 @@ function App() {
       />
       <SearchResults results={results}/> */}
       <main>
+        {/* proxy sandbox */}
+        <TravelSafe />
+
         {/* Trip Index */}
         <Route exact path='/' 
           render={() => 
@@ -138,10 +136,10 @@ function App() {
             <Guideline match={routerProps.match} trip={trip} getResults={getResults} results={results} />
           )}
         />
-        {/* todo - perhaps use /trips as the exact trip index and use the '/' path as a non-exact catch all that redirects to '/trips' */}
+        {/* stretch - perhaps use /trips as the exact trip index and use the '/' path as a non-exact catch all that redirects to '/trips' */}
       </main>
     </div>
-  );
+  )
 }
 
 export default App
