@@ -4,7 +4,7 @@ const TripIndex = ({trips, getTrips, setTrip}) => {
 
     useEffect(() => {
         getTrips()
-        console.log(`TripIndex trips::`,trips)
+        // console.log(`TripIndex trips::`, trips)
     }, [])
 
     return (
@@ -15,7 +15,7 @@ const TripIndex = ({trips, getTrips, setTrip}) => {
                 return(
                     <ul> {/* todo - div instead? */}
                         { trip ? 
-                            <li>
+                            <li key={trip.id}>
                                 {/* {trip.name} , {trip.destination} , {trip.description}, <Link to={`/trips/${trip.id}`}>Travel Guidelines</Link> */}
                                 {trip.name} , 
                                 {trip.destination} , 

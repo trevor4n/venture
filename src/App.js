@@ -37,7 +37,7 @@ function App() {
 
   const requestOptions = {
     method: 'GET', // default
-    mode: 'no-cors',
+    // mode: 'no-cors', // todo - uncomment??
     redirect: 'follow' // default
   }
 
@@ -57,7 +57,8 @@ function App() {
   const [trip, setTrip] = useState([])
 
   useEffect(() => {
-    getResults(searchParams)
+    // getResults(searchParams)
+    getTrips()
   }, [])
 
   function getResults(searchParams){
@@ -110,7 +111,7 @@ function App() {
     // .then(res => res.json())
     .then(res => {
       setTrips(res)
-      console.log(`getTrips:: `, trips)
+      // console.log(`getTrips:: `, trips)
     })
   }
 
@@ -132,7 +133,7 @@ function App() {
         />
 
         {/* Guideline Show */}
-        <Route exact path='/trips/:id' 
+        <Route exact path='/guidelines/:id' 
           render={routerProps => (
             <Guideline match={routerProps.match} trip={trip} getResults={getResults} results={results} />
           )}
