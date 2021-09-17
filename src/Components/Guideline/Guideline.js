@@ -31,16 +31,14 @@ const Guideline = ({ match, trip, getResults, results }) => {
 
   return (
     <div>
-      <h1>Guidelines for {trip.name}</h1>
+      <h1>{trip.name}</h1>
       <p>Destination: {trip.destination}</p>
-      <p>:: {trip.description} ::</p>
+      <p>{trip.description}</p>
       {/* stretch - photo_url */}
-      <hr />
       <p>
         {/* stretch - secondary check for if guideline has been created yet */}
-        --Local Guideline-- <br />
         Location code: {guideline.location} <br />
-        Info: {results[0]}
+      <hr />
         <TravelSafe />
         {/* icebox - guideline[0].trip provides a url that could be used for show trip detail route */}
       </p>
