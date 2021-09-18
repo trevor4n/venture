@@ -31,6 +31,10 @@ body {
   padding: 0 1rem;
 }
 
+main {
+  padding-top: 70px !important;
+}
+
 h1,
 p {
   margin: 0;
@@ -48,7 +52,7 @@ button {
 }
 
 img {
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   width: 100%;
 }
 
@@ -169,3 +173,9 @@ input:hover {
     transform: rotate(360deg);
   }
 } */
+
+/* REACT BOOTSTRAP */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+}

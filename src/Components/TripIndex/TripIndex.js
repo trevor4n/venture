@@ -10,7 +10,9 @@ const TripIndex = ({ trips, getTrips, setTrip }) => {
 
   return (
     <div>
-      <h1>Trips</h1>
+      <h1>Are you planning an adventure?</h1>
+      <h5>Check out the local covid-19 guidelines first</h5>
+      <br />
       {trips.map(trip => {
         // curly braces instead of parentheses
         return (
@@ -20,7 +22,7 @@ const TripIndex = ({ trips, getTrips, setTrip }) => {
             {trip ? (
               <li key={trip.id}>
                 {/* {trip.name} , {trip.destination} , {trip.description}, <Link to={`/trips/${trip.id}`}>Travel Guidelines</Link> */}
-                {trip.name} ,{trip.destination} ,{trip.description} ,
+                {trip.name} <br /> in {trip.destination} ({trip.description}) <br /> 
                 {
                   trip.guidelines.length > 0 ? (
                     // stretch - handle multiple guidelines for each trip

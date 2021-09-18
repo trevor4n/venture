@@ -9,7 +9,7 @@ import axios from 'axios'
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import 'bootstrap/dist/css/bootstrap.min.css'
-// import './App.css'
+import './App.css'
 
 function App() {
   /*
@@ -59,15 +59,15 @@ function App() {
     <div className='App'>
       <Navbar bg='dark' variant='dark' fixed='top'>
         <Container>
-          <Navbar.Brand href='#home'>
+          <Navbar.Brand href='/'>
             <img
               alt=''
-              src='../public/logo512.png'
+              src='https://react-bootstrap.github.io/logo.svg'
               width='30'
               height='30'
-              className='d-inline-block align-top'
+              className='d-inline-block align-top sticky-nav'
             />{' '}
-            React Bootstrap
+            Venture
           </Navbar.Brand>
         </Container>
       </Navbar>

@@ -16,14 +16,17 @@ const TravelSafe = () => {
   function fetchGuideline() {
     const requestOptions = {
       method: 'GET', // default
-      // method: 'POST', // default
-      // mode: 'no-cors', // todo - uncomment?
+      // method: 'POST',
+      // mode: 'no-cors',
       redirect: 'follow', // default
     }
 
     fetch('http://localhost:8000/proxy/country_code/DE/', requestOptions, {
       headers: {
+        // FLAGS
         Authorization: 'ApiKey ' + process.env.REACT_APP_TRAVEL_SAFE_KEY,
+        // Authorization: 'ApiKey ' + process.env.REACT_APP_TRAVEL_SAFE_KEY_PROD,
+        
         Accept: 'application/json',
         'Api-Version': '1',
         'Accept-Language': 'en',
