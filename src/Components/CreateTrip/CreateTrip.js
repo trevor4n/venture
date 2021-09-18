@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 
 const CreateTrip = () => {
@@ -5,7 +6,8 @@ const CreateTrip = () => {
     name: '',
     destination: '',
     description: '',
-    photo_url: 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_the_Czech_Republic.svg',
+    photo_url:
+      'https://upload.wikimedia.org/wikipedia/commons/c/cb/Flag_of_the_Czech_Republic.svg',
     location_type: 'country_code',
     location: 'DE',
   }
@@ -33,22 +35,33 @@ const CreateTrip = () => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    if(
+    if (
       document.getElementById('name').validity.valid &&
       document.getElementById('destination').validity.valid &&
       document.getElementById('description').validity.valid &&
       document.getElementById('photo_url').validity.valid &&
       document.getElementById('location').validity.valid
-    ){
+    ) {
       console.log(formState)
-      // todo - pass data
+      // addVenture(formState)
       setFormState(initialState)
     }
   }
 
-  // function setTrip(t){
+  const addVenture = venture => {
+    const requestOptions = {
+      method: 'POST',
+      // mode: 'no-cors',
+      redirect: 'follow', // default
+    }
+    axios
+      .put('http://localhost:8000/trips/', venture)
+      .then(res => {
+        res.redirect('../TripIndex/TripIndex.js')
+      })
+      .catch(console.error)
+  }
 
-  // }
   return (
     <div className='CreateTrip'>
       <h2>Trip Info 🗺️</h2>
@@ -96,10 +109,10 @@ const CreateTrip = () => {
           </li>
           <li className='form-pair'>
             <label htmlFor='location'>Location Code:</label>
-            <select 
+            <select
               id='location'
-              onChange={handleChange} 
-              // value={formState.location} 
+              onChange={handleChange}
+              // value={formState.location}
             >
               <option value='DE'>DE</option>
               <option value='CZ'>CZ</option>
