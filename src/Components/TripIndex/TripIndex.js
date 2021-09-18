@@ -5,12 +5,13 @@ const TripIndex = ({ trips, getTrips, setTrip }) => {
   useEffect(() => {
     getTrips()
     // console.log(`TripIndex trips::`, trips)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <div>
       <h1>Trips</h1>
-      {trips.map((trip) => {
+      {trips.map(trip => {
         // curly braces instead of parentheses
         return (
           <ul>

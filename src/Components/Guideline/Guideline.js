@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import TravelSafe from '../TravelSafe'
-// todo - local styles
 
-const Guideline = ({ match, trip, getResults, results }) => {
+const Guideline = ({ match, trip }) => {
   const [guideline, setGuideline] = useState([])
 
   function getGuideline() {
     axios
-      .get(`http://localhost:8000/guidelines/${match.params.id}`) // todo - double quotes?
-      .then((res) => res.data)
-      .then((res) => {
+      .get(`http://localhost:8000/guidelines/${match.params.id}`)
+      .then(res => res.data)
+      .then(res => {
         setGuideline(res)
         console.log(`getGuideline:: `, guideline)
       })
@@ -18,16 +17,11 @@ const Guideline = ({ match, trip, getResults, results }) => {
 
   useEffect(() => {
     getGuideline()
-    // todo - consider moving the following into a getGuideline then statement
-    getResults([
-      { locationType: 'country_code' },
-      // { location: "" + guideline[0].location }
-      { location: '' + guideline.location },
-      // icebox - check if string concats are necessary
-    ])
-    console.log(`guideline location:: `, guideline.location)
-    console.log(`Guideline getResults:: `, results)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // avoid moving the following into a getGuideline then statement
+  console.log(`guideline location:: `, guideline.location)
 
   return (
     <div>
@@ -38,7 +32,7 @@ const Guideline = ({ match, trip, getResults, results }) => {
       <p>
         {/* stretch - secondary check for if guideline has been created yet */}
         Location code: {guideline.location} <br />
-      <hr />
+        <hr />
         <TravelSafe />
         {/* icebox - guideline[0].trip provides a url that could be used for show trip detail route */}
       </p>

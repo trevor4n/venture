@@ -1,86 +1,29 @@
 import { useEffect, useState } from 'react'
 import { Route } from 'react-router-dom'
-import SearchForm from './Components/SearchForm/SearchForm'
-import SearchResults from './Components/SearchResults/SearchResults'
-import SearchHeader from './Components/SearchHeader/SearchHeader'
+// import SearchForm from './Components/SearchForm/SearchForm'
+// import SearchResults from './Components/SearchResults/SearchResults'
+// import SearchHeader from './Components/SearchHeader/SearchHeader'
 import Guideline from './Components/Guideline/Guideline'
 import TripIndex from './Components/TripIndex/TripIndex'
-import TravelSafe from './Components/TravelSafe'
 import axios from 'axios'
-// import fetch from 'node-fetch'
-import './App.css'
+import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
+import 'bootstrap/dist/css/bootstrap.min.css'
+// import './App.css'
 
 function App() {
-  const searchOptions = {
-    apiVersion: '1',
-    key: process.env.REACT_APP_TRAVEL_SAFE_KEY,
-    // key: process.env.REACT_APP_TRAVEL_SAFE_KEY_PROD,
-    baseUrl: 'https://sandbox.travelperk.com',
-    // baseUrl: 'https://api.travelperk.com',
-    api: '/travelsafe',
-    // icebox - https://developers.travelperk.com/docs/rest-api
-    // endpoint: '/restrictions',
-    // endpoint: '/airline_safety_measures',
-    endpoint: '/guidelines',
-  }
-
-  const requestOptions = {
-    method: 'GET', // default
-    // mode: 'no-cors', // todo - uncomment?
-    redirect: 'follow', // default
-  }
-
-  // NODE FETCH
-  // ref - https://github.com/node-fetch/node-fetch#api
-  // const requestOptions = {
-  //   method: 'GET', // default
-  //   headers: {
-  //     'Authorization': 'ApiKey ' + searchOptions.key,
-  //     'Accept': 'application/json',
-  //     'Api-Version': '1',
-  //     'Accept-Language': 'en'
-  //   },
-  //   redirect: 'follow' // default
-  // }
-
+  /*
   const [searchParams, setSearchParams] = useState([
     { locationType: 'country_code' },
     { location: '' },
   ])
   const [lastSearch, setLastSearch] = useState([])
   const [results, setResults] = useState([])
+  */
   const [trips, setTrips] = useState([])
   const [trip, setTrip] = useState([])
 
-  function getResults(searchParams) {
-    // stretch - Travel Restrictions parametric url
-    // ref - https://developers.travelperk.com/docs/travel-restrictions
-    // stretch - Airline Safety Measurres parametric url
-    // ref - https://developers.travelperk.com/docs/airline-safety-measures
-    // wip - Travel Guidelines parametric url
-    // ref - https://developers.travelperk.com/reference#retrieve-a-local-guideline
-    const url = `${searchOptions.baseUrl}${searchOptions.api}${searchOptions.endpoint}?location_type=${searchParams[0].locationType}&location=${searchParams[1].location}`
-
-    // NODE FETCH
-    // fetch(url, requestOptions)
-    fetch(url, requestOptions, {
-      headers: {
-        Authorization: 'ApiKey ' + searchOptions.key,
-        Accept: 'application/json',
-        'Api-Version': '1',
-        'Accept-Language': 'en',
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(`TravelSafe response::`, response)
-        setResults(response.data)
-        setLastSearch(searchParams)
-        setSearchParams({})
-      })
-      .catch(console.error)
-  }
-
+  /* 
   function handleChange(event) {
     let tmpSearchParams = [
       { locationType: 'country_code' },
@@ -95,12 +38,13 @@ function App() {
     event.preventDefault()
     getResults(searchParams)
   }
+  */
 
   function getTrips() {
     axios
       .get('http://localhost:8000/trips')
-      .then((res) => res.data)
-      .then((res) => {
+      .then(res => res.data)
+      .then(res => {
         setTrips(res)
         // console.log(`getTrips:: `, trips)
       })
@@ -112,7 +56,21 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
+    <div className='App'>
+      <Navbar bg='dark' variant='dark' fixed='top'>
+        <Container>
+          <Navbar.Brand href='#home'>
+            <img
+              alt=''
+              src='../public/logo512.png'
+              width='30'
+              height='30'
+              className='d-inline-block align-top'
+            />{' '}
+            React Bootstrap
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
       {/* <SearchHeader lastSearch={lastSearch} />
       <SearchForm
         handleChange={handleChange}
@@ -124,7 +82,7 @@ function App() {
         {/* Trip Index */}
         <Route
           exact
-          path="/"
+          path='/'
           render={() => (
             <TripIndex trips={trips} getTrips={getTrips} setTrip={setTrip} />
           )}
@@ -133,20 +91,17 @@ function App() {
         {/* Guideline Show */}
         <Route
           exact
-          path="/guidelines/:id"
-          render={(routerProps) => (
-            <Guideline
-              match={routerProps.match}
-              trip={trip}
-              getResults={getResults}
-              results={results}
-            />
+          path='/guidelines/:id'
+          render={routerProps => (
+            <Guideline match={routerProps.match} trip={trip} />
           )}
         />
-        {/* stretch - perhaps use /trips as the exact trip index and use the '/' path as a non-exact catch all that redirects to '/trips' */}
+        {/* icebox - /trips as the exact trip index and use the '/' path as a non-exact redirect catch to '/trips' */}
       </main>
     </div>
   )
 }
+
+// icebox - string concats
 
 export default App

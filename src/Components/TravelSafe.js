@@ -42,7 +42,8 @@ const TravelSafe = () => {
   useEffect(() => {
     fetchGuideline()
     // console.log(guideline)
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []) 
 
   console.log(guideline)
 
