@@ -53,9 +53,8 @@ const TravelSafe = () => {
   if(Object.keys(guideline).length > 0){
     return (
       <div>
-        <h3>{guideline.details}</h3>
-        <div>{guideline.summary}</div>
-        <h4>Risk Level: {guideline.risk_level['name']} - {guideline.risk_level["details"]}</h4>
+        <h3>🦠 {guideline.details}</h3> <br />
+        <h4>Risk Level: {guideline.risk_level['name']} - {guideline.risk_level["details"]}</h4> <br />
         {/* <div>{guideline.risk_level["details"]}</div> */}
 
         {/* Mask Policy */}
@@ -76,7 +75,8 @@ const TravelSafe = () => {
         <br />
         {/* <div>Severity of - {guideline.guidelines[0].category['name']} - {guideline.guidelines[0].severity} </div> */}
         <div>Severity of internal government measures: {guideline.guidelines[0].severity} </div>
-        <h6>{guideline.guidelines[0].summary}</h6>
+        <h6>{guideline.guidelines[0].summary}*</h6>
+        <div className='regulations'>*{guideline.summary}</div> <br />
       </div>
     )
   } else {

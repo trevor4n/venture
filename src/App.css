@@ -91,13 +91,26 @@ input:hover {
   outline: 0;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .App {
   text-align: center;
 }
 
-.App-SearchForm {
+.App-CreateTrip {
+  align-items: center;
+  display: flexbox;
+}
+
+.form-pair {
   align-items: center;
   display: flex;
+  padding-bottom: 5vmin;
+}
+.form-pair label {
+  padding-right: 1vw;
 }
 
 /* @media (min-width: 600px) {
@@ -130,6 +143,11 @@ input:hover {
   height: 2rem;
   margin: 0 0.5rem 0 0;
   width: auto;
+}
+
+.viz {
+  /* width: 3vmin; */
+  height: 100%;
 }
 
 .brand h1 {
@@ -174,8 +192,28 @@ input:hover {
   }
 } */
 
+.regulations  {
+  position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   background:#999;
+}
+
 /* REACT BOOTSTRAP */
 .sticky-nav {
   position: sticky;
   top: 0;
+  height: auto;
+  width: 3vmin;
 }
+
+/* @media (min-width: 768px) {
+  .navbar-brand.abs{
+    position: absolute;
+    width: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}} */
