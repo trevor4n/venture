@@ -39,8 +39,8 @@ function App() {
               alt=''
               src='https://react-bootstrap.github.io/logo.svg'
               // src={viz}
-              // width='30'
-              // height='30'
+              width='30'
+              height='30'
               className='d-inline-block align-top sticky-nav viz'
             />{' '}
             Venture
