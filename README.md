@@ -2,7 +2,7 @@
 # Venture - September 18, 2021
 ##### A trip planning tool built with covid-19 safety in mind 
 <p align="center">
-  <img src="#" alt='Venture guideline show info'>
+  <img src="https://user-images.githubusercontent.com/44274876/133885136-455daf52-f682-4eb3-98a0-b4d00ff80e8f.png" alt='Venture guideline show info'>
  </p>
 
 
