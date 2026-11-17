@@ -36,7 +36,8 @@ Building a trip planner was the foundation for my capstone. It's personally rele
  - [ ] `$ pipenv shell`
  - [ ] `$ python manage.py runserver`
  - [ ] In a separate terminal instance, navigate to the frontend project directory
- - [ ] `$ npm start`
+ - [ ] `$ nvm use && npm install` (Node version is in `.nvmrc`)
+ - [ ] `$ npm start` (opens http://localhost:3000)
 
  ### 🚧 major hurdles
  - [X] First-time setup of DRM proxy requests took longer than anticipated due to hangups with TravelPerk's API
