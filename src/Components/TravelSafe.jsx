@@ -24,8 +24,8 @@ const TravelSafe = () => {
     fetch('http://localhost:8000/proxy/country_code/DE/', requestOptions, {
       headers: {
         // FLAGS
-        Authorization: 'ApiKey ' + process.env.REACT_APP_TRAVEL_SAFE_KEY,
-        // Authorization: 'ApiKey ' + process.env.REACT_APP_TRAVEL_SAFE_KEY_PROD,
+        Authorization: 'ApiKey ' + import.meta.env.REACT_APP_TRAVEL_SAFE_KEY,
+        // Authorization: 'ApiKey ' + import.meta.env.REACT_APP_TRAVEL_SAFE_KEY_PROD,
         
         Accept: 'application/json',
         'Api-Version': '1',
